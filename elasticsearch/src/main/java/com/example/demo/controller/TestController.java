@@ -1,30 +1,32 @@
 package com.example.demo.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.example.demo.Entity.Article;
+import com.example.demo.entity.Answer;
+import com.example.demo.service.AnswerService;
+import java.util.List;
 import org.elasticsearch.client.transport.TransportClient;
-import org.elasticsearch.common.xcontent.XContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("es")
 public class TestController {
-    @Autowired
-    private TransportClient transportClient;
 
-    @RequestMapping("add")
-    public String add() {
-        Article employee = new Article();
-        employee.setAttUrl("123");
-        employee.setContext("54654");
-        employee.setGeographicalLocation("schj");
-        employee.setGrade("123321");
-        transportClient.prepareIndex("cc1", "cc1").setSource(JSON.toJSONString(employee),XContentType.JSON).get();
-        System.err.println("add a obj");
-        return "success";
-    }
+  @Autowired
+  private TransportClient transportClient;
+  @Autowired
+  private AnswerService answerService;
+
+  @RequestMapping("add")
+  public String add() {
+    return answerService.insert(new Answer()) + "";
+  }
+
+  @RequestMapping("find")
+  public List<Answer> find(@RequestParam String keys) {
+    return answerService.findByKeys(keys);
+  }
 
 
 }
