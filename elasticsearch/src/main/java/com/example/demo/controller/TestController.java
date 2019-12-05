@@ -28,5 +28,9 @@ public class TestController {
     return answerService.findByKeys(keys);
   }
 
+  @RequestMapping("highlightBykeys")
+  public List<Answer> highlightBykeys(@RequestParam String keys) {
+    return answerService.highlightBykeys(keys);
+  }
 
 }

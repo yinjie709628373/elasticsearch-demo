@@ -16,13 +16,13 @@ public class Answer implements Serializable {
   @Id
   private String id;
 
-  @Field(type = FieldType.Text)
+  @Field(type = FieldType.Text, searchAnalyzer = "ik_max_word")
   private String titles;
 
-  @Field(type = FieldType.Date)
+  @Field(type = FieldType.Text, searchAnalyzer = "ik_max_word")
   private Date createTime;
 
-  @Field(type = FieldType.Text)
+  @Field(type = FieldType.Text, searchAnalyzer = "ik_max_word")
   private String contents;
 
 
