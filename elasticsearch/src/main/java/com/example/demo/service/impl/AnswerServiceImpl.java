@@ -100,8 +100,7 @@ public class AnswerServiceImpl implements AnswerService {
       //高亮字段
       if (!StringUtils.isEmpty(hit.getHighlightFields().get("contents"))) {
         Text[] text = hit.getHighlightFields().get("contents").getFragments();
-        entity.setContents(
-            String.valueOf(entityMap.get("contents")).replace(keys, text[0].toString()));
+        entity.setContents(text[0].toString());
       } else {
         entity.setContents(String.valueOf(entityMap.get("contents")));
       }
@@ -109,7 +108,7 @@ public class AnswerServiceImpl implements AnswerService {
       if (!StringUtils.isEmpty(hit.getHighlightFields().get("titles"))) {
         Text[] text = hit.getHighlightFields().get("titles").getFragments();
         entity
-            .setTitles(String.valueOf(entityMap.get("titles")).replace(keys, text[0].toString()));
+            .setTitles(text[0].toString());
       } else {
         entity.setTitles(String.valueOf(entityMap.get("titles")));
       }
